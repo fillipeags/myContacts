@@ -14,6 +14,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'consistent-return': 'off',
 		camelcase: 'off',
-		allowIndentationTabs: true
+		allowIndentationTabs: true,
+		'no-unused-vars': ['error', {argsIgnorePattern: 'next'}],
 	},
 };
