@@ -30,6 +30,14 @@ class CategoryController {
     const category = await CategoriesRepository.create({ name });
 
     response.json(category);
+	}
+
+	async delete(request, response) {
+    // Deletar um registro
+    const { id } = request.params;
+
+    await CategoriesRepository.delete(id);
+    response.sendStatus(204);
   }
 }
 

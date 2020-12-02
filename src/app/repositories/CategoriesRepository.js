@@ -21,6 +21,20 @@ class CategoriesRepository {
 			WHERE id = $1
 		`, [id]);
     return row;
+	}
+
+	async delete(id) {
+		const removeFK = await db.query(`
+			UPDATE contacts
+			SET category_id = NULL
+			WHERE category_id = $1
+		`, [id]);
+
+		const deleteOp = await db.query(`
+			DELETE FROM categories
+			WHERE id = $1`
+		, [id]);
+    return deleteOp;
   }
 }
 
