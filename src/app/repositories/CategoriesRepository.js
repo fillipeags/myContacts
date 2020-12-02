@@ -13,6 +13,14 @@ class CategoriesRepository {
       RETURNING *
     `, [name]);
     return row;
+	}
+
+	async findById(id) {
+		const [row] = await db.query(`
+			SELECT name FROM categories
+			WHERE id = $1
+		`, [id]);
+    return row;
   }
 }
 
