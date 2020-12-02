@@ -32,6 +32,25 @@ class CategoryController {
     response.json(category);
 	}
 
+  async update(request, response) {
+    // Editar um registro
+    const { id } = request.params;
+    const { name } = request.body;
+
+    const categoryExists = await CategoriesRepository.findById(id);
+    if (!categoryExists) {
+      return response.status(404).json({ error: 'Category not found' });
+    }
+
+    if (!name) {
+      return response.status(400).json({ error: 'Category Name is required' });
+    }
+
+    const category = await CategoriesRepository.update(id, { name });
+
+    response.json(category);
+  }
+
 	async delete(request, response) {
     // Deletar um registro
     const { id } = request.params;
