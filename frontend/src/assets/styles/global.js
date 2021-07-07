@@ -12,5 +12,6 @@ export default createGlobalStyle`
     background: ${({ theme }) => theme.colors.background};
     font-size: 16px;
     cursor: pointer;
+    color: ${({ theme }) => theme.colors.gray[900]};
   }
 `;
