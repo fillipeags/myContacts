@@ -23,6 +23,9 @@ export const Container = styled.div`
 
   h1 {
     font-size: 22px;
+    color: ${({ theme, danger }) => (
+    danger ? theme.colors.danger.main : theme.colors.gray[900]
+  )}
   }
 
   p {
@@ -33,7 +36,6 @@ export const Container = styled.div`
 
 export const Footer = styled.footer`
   margin-top: 32px;
-
   display: flex;
   align-items: center;
   justify-content: flex-end;

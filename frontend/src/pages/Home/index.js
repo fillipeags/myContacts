@@ -11,11 +11,12 @@ import Modal from '../../components/Modal';
 export default function Home() {
   return (
     <Container>
+
       <InputSearchContainer>
         <input type="text" placeholder="Pesquisar contato..." />
       </InputSearchContainer>
 
-      <Modal />
+      <Modal danger />
 
       <Header>
         <strong>3 contatos</strong>
