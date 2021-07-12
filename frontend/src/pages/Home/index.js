@@ -6,6 +6,7 @@ import {
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import Modal from '../../components/Modal';
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
       <InputSearchContainer>
         <input type="text" placeholder="Pesquisar contato..." />
       </InputSearchContainer>
+
+      <Modal />
 
       <Header>
         <strong>3 contatos</strong>
