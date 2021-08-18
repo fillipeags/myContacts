@@ -15,4 +15,4 @@ app.use((error, request, response, next) => {
 });
 
 // eslint-disable-next-line no-console
-app.listen(3000, () => console.log('🔥Server started running at http://localhost:3000'));
+app.listen(3001, () => console.log('🔥 Server started running at http://localhost:3001'));
