@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 import {
   useEffect, useState, useMemo, useCallback,
@@ -10,6 +12,8 @@ import {
   Card,
   InputSearchContainer,
   ErrorContainer,
+  EmptyListContainer,
+  SearchNotFoundContainer,
 } from './styles';
 
 import Loader from '../../components/Loader';
@@ -19,6 +23,8 @@ import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
+import emptyBox from '../../assets/images/empty-box.svg';
+import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import ContactsService from '../../services/ContactsService';
 
@@ -69,17 +75,29 @@ export default function Home() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
-      <InputSearchContainer>
-        <input
-          value={searchTerm}
-          type="text"
-          placeholder="Pesquisar contato..."
-          onChange={handleChangeSearchTerm}
-        />
-      </InputSearchContainer>
 
-      <Header hasError={hasError}>
-        {!hasError && (
+      {contacts.length > 0 && (
+        <InputSearchContainer>
+          <input
+            value={searchTerm}
+            type="text"
+            placeholder="Pesquisar contato..."
+            onChange={handleChangeSearchTerm}
+          />
+        </InputSearchContainer>
+      )}
+
+      <Header justifyContent={
+        hasError
+          ? 'flex-end'
+          : (
+            contacts.length > 0
+              ? 'space-between'
+              : 'center'
+          )
+      }
+      >
+        {(!hasError && contacts.length > 0) && (
           <strong>
             {filteredContacts.length}
             {filteredContacts.length === 1 ? ' contato' : ' contatos'}
@@ -104,6 +122,33 @@ export default function Home() {
 
       {!hasError && (
         <>
+          {(contacts.length < 1 && !isLoading) && (
+            <EmptyListContainer>
+              <img src={emptyBox} alt="Empty Box" />
+              <p>
+                Você ainda não tem nenhum contato cadastrado!
+                Clique no botão
+                <strong>"Novo contato"</strong>
+                a cima para cadastrar o seu primeiro !
+              </p>
+            </EmptyListContainer>
+          )}
+
+          {
+            (contacts.length > 0 && filteredContacts.length < 1) && (
+              <SearchNotFoundContainer>
+                <img src={magnifierQuestion} alt="Magnifier Question" />
+                <span>
+                  Nenhum resultado foi encontrado para
+                  <strong>
+                    {' '}
+                    {searchTerm}
+                  </strong>
+                </span>
+              </SearchNotFoundContainer>
+
+            )
+          }
           {
             filteredContacts.length > 0 && (
               <ListHeader orderBy={orderBy}>
